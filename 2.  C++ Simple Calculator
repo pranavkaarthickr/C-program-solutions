@@ -1,52 +1,53 @@
 //C++ program to perform function of a simple Calculator
 /*Program Logic
- First the user defined variables are initialized. 
+ First the user defined variables are initialized.
  Then the Operator (+,-,*,/) is received from the user along with two inputs.
- Then by using Switch statement, the operation of calculator is performed. 
- If the user enters any operator other than (+,-,*,/), the progrom won't do calculator  operation.  While dividing operation, if the b==0, then operation will be stopped due to divide by zero error
+ Then by using Switch statement, the operation of calculator is performed.
+ If the user enters any operator other than (+,-,*,/), the progrom won't do calculator  operation.  
+ While dividing operation, if the b==0, then operation will be stopped due to divide by zero error.
 */
 
 #include <iostream>
-using namespace std; 
+using namespace std;
 int main() {
     // Write C++ code here
-int a,b = 0;
-char cal_func;
+    int a, b = 0;
+    char cal_func;
 
-cout <<"Enter the Operation that you want..... + , - , * , /  \n  ";
-cin >>cal_func;
+    cout << "Enter the Operation that you want..... + , - , * , /  \n  ";
+    cin >> cal_func;
 
-cout <<"Please Enter the Two Numbers on which You Wish to Perform Operation On  \n ";
-cin >>a>>b;
+    cout << "Please Enter the Two Numbers on which You Wish to Perform Operation On  \n ";
+    cin >> a >> b;
 
-switch(cal_func)
-{
-    case '+':
-    cout <<a<<" + "<<b<<" =  "<<a+b;
-    break;
-    
-    case '-':
-    cout <<a<<" - "<<b<<" =  "<<a-b;
-    break;
-    
-    case '*':
-    cout <<a<<" * "<<b<<" =  "<<a*b;
-    break;
-    
-    case '/':
-    if(b){
-    cout <<a<<" / "<<b<<" =  "<<a/b;
-    }
-    else
+    switch (cal_func)
     {
-        cout <<"Error!!! DIVIDE by ZERO Exception";
-    }
-    break;
+    case '+':
+        cout << a << " + " << b << " =  " << a + b;
+        break;
+
+    case '-':
+        cout << a << " - " << b << " =  " << a - b;
+        break;
+
+    case '*':
+        cout << a << " * " << b << " =  " << a * b;
+        break;
+
+    case '/':
+        if (b) {
+            cout << a << " / " << b << " =  " << a / b;
+        }
+        else
+        {
+            cout << "Error!!! DIVIDE by ZERO Exception";
+        }
+        break;
 
     default:
-    cout <<"operator Not Found. Please Enter a valid operator";
-    break;
-}
-    cout<<"\n Operation Finished";
+        cout << "operator Not Found. Please Enter a valid operator";
+        break;
+    }
+    cout << "\n Operation Finished";
     return 0;
 }
