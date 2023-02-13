@@ -7,18 +7,28 @@
  * 
  */
 
-int input_num = 0, fact = 1;
-
-Console.WriteLine("Please Enter The Number That You Want To Find Factorial Of It.");
-
-input_num = Convert.ToInt32(Console.ReadLine());
-
-Console.WriteLine($"The Number That You Have Entered Is {input_num}");
-
-for (int i = 1; i<= input_num; i++)
+namespace ConsoleApp1FactRecursion
 {
-    fact = fact * i;
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int input_num = 0, fact = 1;
 
+            Console.WriteLine("Please Enter The Number That You Want To Find Factorial Of It.");
+
+            input_num = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"The Number That You Have Entered Is {input_num}");
+
+            for (int i = 1; i <= input_num; i++)
+            {
+                fact = fact * i;
+
+            }
+
+            Console.WriteLine($"The Factorial of {input_num} is {fact}");
+
+        }
+    }
 }
-
-Console.WriteLine($"The Factorial of {input_num} is {fact}");
