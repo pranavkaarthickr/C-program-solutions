@@ -1,0 +1,45 @@
+// See https://aka.ms/new-console-template for more information
+
+//This Program is to check whether a user entered string is Palindrome or Not
+
+/*The Logic for the given program.
+ * Initializing string variables required for the program.
+ * The Input String is received from the user and assigned to userString_Input.
+ * Then the input string is assigned to the variable userString.
+ * Then it is coverted to lower case to avoid wrong result because the strings are case senstive.
+ * Then the length of the string is identified and checked whether it is equal to zero or not.
+ * Then the string is reversed using For loop and assigned to reversedString.
+ * By using If else statement both the userString and reversedString is compared. 
+ * If both are equal, then the user string is Palindrome, else not a Palindrome
+ * 
+ * */
+string userString_Input, userString, reversedString = string.Empty;
+
+Console.WriteLine("Please Enter The String That You Want To Check Whether It Is Palindrome or Not.....");
+userString_Input = Console.ReadLine();
+
+//Preparation of User String
+
+userString = userString_Input;
+userString = userString.ToLower();
+
+int userStringLength = userString.Length;
+
+
+Console.WriteLine($"The user entered String is {userString_Input} and the Reversed String is {reversedString}...");
+if (userStringLength > 0)
+    for (int i = userStringLength - 1; i >= 0; i--)
+    {
+        reversedString = reversedString + userString[i];
+
+    }
+{
+    if (userString == reversedString)
+    {
+        Console.WriteLine($"TRUE!!!  The Given String {userString} is a Palindrome...");
+    }
+    else
+    {
+        Console.WriteLine($"FALSE!!! The Given String {userString} is Not a Palindrome...");
+    }
+}
