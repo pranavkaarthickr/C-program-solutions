@@ -1,0 +1,42 @@
+
+//Factorial of a Number using Recursion Function
+/*Program Logic
+ * Integer Variables are initialized.
+ * The number is received from the user and converted into Int.
+ * User Defined Function GetFact(int num) is defined inside the class Program.
+ * By using the Recursion method, the factorial of a given number is identified. 
+ */
+namespace ConsoleApp1FactRecursion
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int input_num = 0, fact = 1;
+
+            Console.WriteLine("Please Enter The Number That You Want To Find Factorial Of It.");
+
+            input_num = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"The Number That You Have Entered Is {input_num}");
+
+            fact = GetFact(input_num);
+
+            Console.WriteLine($"The Factorial of {input_num} is {fact}");
+
+        }
+
+        static int GetFact(int num)
+        {
+            if (num == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return num * GetFact(num-1);
+
+            }
+        }
+    }
+}
