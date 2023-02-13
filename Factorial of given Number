@@ -1,0 +1,24 @@
+
+//Program to find Factorial of a Given Number
+/*Program Logic
+ * Integer Variables are initialized.
+ * The number is received from the user and converted into Int.
+ * By using for loop, the factorial of the number is found.
+ * 
+ */
+
+int input_num = 0, fact = 1;
+
+Console.WriteLine("Please Enter The Number That You Want To Find Factorial Of It.");
+
+input_num = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine($"The Number That You Have Entered Is {input_num}");
+
+for (int i = 1; i<= input_num; i++)
+{
+    fact = fact * i;
+
+}
+
+Console.WriteLine($"The Factorial of {input_num} is {fact}");
