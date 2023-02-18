@@ -1,0 +1,181 @@
+// Note: XAML code is below the C# Program
+
+/* C# Simple Calculator Application using WinForm
+ *First Textbox and 16 buttons (10 buttons for numbers 0 to 9, 4 buttons for Arithematic Operation) and 1 button each
+ *for Clear and EqualsTo are created using XAML. 
+ *New Variables are initialized.
+ *When user clicks any button having value between 0 and 9, the content of the button is copied as string to TxtResult.Text and to secondVar.
+ *When User clicks any operator (+,-,*,/), it's respective function will be called.
+ * The contents of TxtResult.Text is copied to firstVar. The Operator is asigned to the variable operator.
+ *When user clicks any button having value between 0 and 9, the content of the button is copied as string to TxtResult.Text and to secondVar.
+ *
+ *When EqualsTo function is called, by employing Switch Stamement, the correct operation will be performed.
+ *The result will be displayed on Textbox.
+ *When choosing Division, if the secondVar is Zero, then the program will be stopped due to Divide by Zero Exception.
+ *When CE button is clicked, the textbox will be cleared.
+ *
+ */
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+
+
+namespace WpfApp3
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        int firstVar;
+        int secondVar;
+        char operation;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            TxtResult.Text += btn.Content.ToString();
+            secondVar = Int32.Parse(TxtResult.Text);
+        }
+
+
+        private void MultiplyButton_Click(object sender, RoutedEventArgs e)
+        {
+            firstVar = Int32.Parse(TxtResult.Text.ToString());
+            operation = '*';
+            TxtResult.Clear();
+        }
+
+        private void DivisionButton_Click(object sender, RoutedEventArgs e)
+        {
+            firstVar = Int32.Parse(TxtResult.Text.ToString());
+            operation = '/';
+            TxtResult.Clear();
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            firstVar = Int32.Parse(TxtResult.Text.ToString());
+            operation = '+';
+            TxtResult.Clear();
+        }
+
+        private void SubtractButton_Click(object sender, RoutedEventArgs e)
+        {
+            firstVar = Int32.Parse(TxtResult.Text.ToString());
+            operation = '-';
+            TxtResult.Clear();
+        }
+
+        private void EqualsTo_Click(object sender, RoutedEventArgs e)
+        {
+            secondVar = Int32.Parse(TxtResult.Text.ToString());
+            int result = 0;
+
+            switch (operation)
+            {
+                case '+':
+                    result = firstVar + secondVar;
+                    break;
+
+                case '-':
+                    result = firstVar - secondVar;
+                    break;
+
+                case '*':
+                    result = firstVar * secondVar;
+                    break;
+
+                case '/':
+                    if (secondVar != 0)
+                    {
+                        result = firstVar / secondVar;
+                    }
+                    else
+                    {
+                        firstVar = 0;
+                        operation = ' ';
+                        TxtResult.Clear();
+                        MessageBox.Show("Divide by Zero Error. Pless Press CE to clear");
+                    }
+                    break;
+
+            }
+
+            if (TxtResult.Text == "0")
+            {
+                TxtResult.Clear();
+
+            }
+
+            TxtResult.Text = result.ToString();
+            operation = ' ';
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            firstVar = 0;
+            secondVar = 0;
+            operation = ' ';
+            TxtResult.Text = "0";
+            MessageBox.Show("cleared");
+            TxtResult.Clear();
+        }
+    }
+}
+
+
+
+
+
+
+
+//XAML Code
+<Window x:Class="WpfApp3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3"
+        mc:Ignorable="d"
+        Title="MyCalculator" Height="450" Width="800">
+    <Grid Margin="0,0,0,-6" RenderTransformOrigin="0.996,0.517">
+        <TextBox Name="TxtResult" Width="508" Height="50" Margin="32,25,260,365" ></TextBox>
+        <Button Height="50" Width="60" Content="7" FontSize="30" Click="Button_Click" Margin="25,117,700,257"></Button>
+        <Button Height="50" Width="60" Content="8" FontSize="30" Click="Button_Click" Margin="126,122,614,262"/>
+        <Button Height="50" Width="60" Content="9" FontSize="30" Click="Button_Click" Margin="217,122,523,262"/>
+        <Button x:Name="MultiplyButton" Height="50" Width="60" Content="*" FontSize="30" Margin="308,122,432,262" Click="MultiplyButton_Click"/>
+        <Button Height="50" Width="60" Content="4" FontSize="30" Click="Button_Click" Margin="25,217,700,157"/>
+        <Button Height="50" Width="60" Content="5" FontSize="30" Click="Button_Click" Margin="126,222,614,162"/>
+        <Button Height="50" Width="60" Content="6" FontSize="30" Click="Button_Click" Margin="217,222,523,162"/>
+        <Button x:Name="DivisionButton" Height="50" Width="60" Content="/" FontSize="30" Margin="308,222,432,162" Click="DivisionButton_Click"/>
+        <Button Height="50" Width="60" Content="1" FontSize="30" Click="Button_Click" Margin="25,314,700,60"/>
+        <Button Height="50" Width="60" Content="2" FontSize="30" Click="Button_Click" Margin="126,319,614,65"/>
+        <Button Height="50" Width="60" Content="3" FontSize="30" Click="Button_Click" Margin="217,319,523,65"/>
+        <Button Height="50" Width="60" Content="0" FontSize="30" Click="Button_Click" Margin="308,319,432,65"/>
+        <Button x:Name="SubtractButton" Height="50" Width="60" Content="-" FontSize="30" Margin="400,222,340,162" Click="SubtractButton_Click"/>
+        <Button Name="EqualsTo"  Height="50" Width="60" Content="=" FontSize="30" Margin="400,319,340,65" Click="EqualsTo_Click"/>
+        <Button Name="AddButton" Height="50" Width="60" Content="+" FontSize="30" Margin="400,122,340,262" Click="AddButton_Click"/>
+        <Button Content="CE" Width="60" Height="50" FontSize="24" Margin="578,25,162,365" Click="Button_Click_1"/>
+    </Grid>
+</Window>
