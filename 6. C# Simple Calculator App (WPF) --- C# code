@@ -1,6 +1,6 @@
 // Note: XAML code is below the C# Program
 
-/* C# Simple Calculator Application using WinForm
+/* C# Simple Calculator Application using WPF.
  *First Textbox and 16 buttons (10 buttons for numbers 0 to 9, 4 buttons for Arithematic Operation) and 1 button each
  *for Clear and EqualsTo are created using XAML. 
  *New Variables are initialized.
