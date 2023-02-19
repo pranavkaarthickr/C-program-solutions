@@ -1,0 +1,65 @@
+// ConsoleApplication1.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// C++ program that allows users to input a set of points in 2D space, and computes the minimum bounding box that contains all the points. 
+//
+// Program Logic
+//
+/*Header files 'iostream' and 'vector' are included.
+* struct Point2D defines a 2D point in space, represented by its x and y coordinates.
+* A class called BoundingBox containing two public data members, min_point and max_point, which are objects of type Point2D are created.
+* A constructor of the BoundingBox class takes a reference to a vector of Point2D objects as its argument. 
+* It initializes min_point to the maximum possible value of a float, and max_point to the minimum possible value of a float. 
+* It then loops through each point in the input vector,updating min_point and max_point as necessary to 
+find the minimum and maximum x and y coordinates of all the points.
+* int main() is the main function of the program. a vector named points of type Point2D is declared.
+*It first prompts the user to enter the number of points to be entered. 
+*It then loops through the number of points and prompts the user to enter the x and y coordinates of each point. 
+*The points are stored in a vector of Point2D structures.
+* After all the points are entered, a BoundingBox object is created by passing the vector of points to its constructor. 
+*The minimum and maximum points of the bounding box are then printed to the console. 
+*The program then returns 0 to indicate successful execution.
+
+*/
+
+
+
+#include <iostream>
+#include <vector>
+
+struct Point2D {
+    float x, y;
+};
+
+class BoundingBox {
+public:
+    Point2D min_point, max_point;
+
+    BoundingBox(const std::vector<Point2D>& points) {
+        min_point = { FLT_MAX, FLT_MAX };
+        max_point = { -FLT_MAX, -FLT_MAX };
+
+        for (const auto& point : points) {
+            if (point.x < min_point.x) min_point.x = point.x;
+            if (point.y < min_point.y) min_point.y = point.y;
+
+            if (point.x > max_point.x) max_point.x = point.x;
+            if (point.y > max_point.y) max_point.y = point.y;
+        }
+    }
+};
+
+int main() {
+    std::vector<Point2D> points;
+    int n;
+    std::cout << "Enter the number of points: ";
+    std::cin >> n;
+    for (int i = 0; i < n; i++) {
+        Point2D point;
+        std::cout << "Enter point " << i + 1 << " (x, y): ";
+        std::cin >> point.x >> point.y;
+        points.push_back(point);
+    }
+    BoundingBox box(points);
+    std::cout << "Min point: (" << box.min_point.x << ", " << box.min_point.y << ")\n";
+    std::cout << "Max point: (" << box.max_point.x << ", " << box.max_point.y << ")\n";
+    return 0;
+}
