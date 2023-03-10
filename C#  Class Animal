@@ -1,5 +1,5 @@
 //
-//class.cs
+//Animal.cs
 //
 
 
@@ -44,13 +44,13 @@ namespace ConsoleApp1
 }
 
 
-
 //
 //Program.cs
 //
 
 
 using ConsoleApp1;
+using System.Globalization;
 
 namespace ConsoleApp1testesesr
 {
@@ -61,36 +61,53 @@ namespace ConsoleApp1testesesr
             Animal Dog = new Animal("Dog1", 4);
             Animal Cat = new Animal("Cat1", 4);
 
-            Thread AgeUpdate1 = new Thread(thread1);
-            Thread PrintDisplay1 = new Thread(thread2);
+            object dogLockObject = new object();
+            object catLockObject = new object();
+
+            Thread AgeUpdate1 = new Thread(() => thread1(Dog, Cat, dogLockObject, catLockObject));
+            Thread PrintDisplay1 = new Thread(() => thread2(Dog, Cat, dogLockObject, catLockObject));
+
 
             AgeUpdate1.Start();
-            //PrintDisplay1.Start();
+            PrintDisplay1.Start();
 
             AgeUpdate1.Join();
-            //PrintDisplay1.Join();
+            PrintDisplay1.Join();
 
-            void thread1()
+            static void thread1(Animal dog, Animal cat, object dogLockObject, object catLockObject)
             {
                 for (int i = 1; i <= 5; i++)
                 {
-                    Dog.AgeUpdater();
-                    Cat.AgeUpdater();
-                    Thread.Sleep(1000);
-                    thread2();
+                    lock (dogLockObject)
+                    {
+                        dog.AgeUpdater();
+                    }
+                    lock (catLockObject)
+                    {
+                        cat.AgeUpdater();
+                    }
+                    Task.Delay(1000).Wait();
+                }
+            }
+            static void thread2(Animal dog, Animal cat, object dogLockObject, object catLockObject)
+            {
+                for (int j = 1; j <= 5; j++)
+                {
+
+                    lock (dogLockObject)
+                    {
+                        dog.DisplayNameAge();
+                    }
+                    lock (catLockObject)
+                    {
+                        cat.DisplayNameAge();
+                    }
+                    Task.Delay(1200).Wait();
 
                 }
-
-                //thread2();
-            }
-
-            void thread2()
-            {
-                Dog.DisplayNameAge();
-                Cat.DisplayNameAge();
             }
         }
     }
 }
 
-    
+
