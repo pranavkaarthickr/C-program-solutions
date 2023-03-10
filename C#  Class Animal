@@ -1,0 +1,96 @@
+//
+//class.cs
+//
+
+
+using System;
+using System.Threading;
+
+namespace ConsoleApp1
+{
+    internal class Animal
+    {
+        private object lockObject = new object();
+        public string Name { get; set; }
+        public int LegsCount { get; set; }
+        public int Age { get; set; }
+
+        public Animal(string animalname, int totalLegs)
+        {
+            Name = animalname;
+            LegsCount = totalLegs;
+        }
+
+        public void DisplayNameAge()
+        {
+            lock (lockObject)
+            {
+
+                Console.WriteLine($"The Name of the animal object is {Name} and its current age is {Age}.");
+
+            }
+        }
+
+        public void AgeUpdater()
+        {
+            lock (lockObject)
+            {
+                int currentAge = Age;
+                Age = currentAge + 1;
+            }
+        }
+    }
+
+}
+
+
+
+//
+//Program.cs
+//
+
+
+using ConsoleApp1;
+
+namespace ConsoleApp1testesesr
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Animal Dog = new Animal("Dog1", 4);
+            Animal Cat = new Animal("Cat1", 4);
+
+            Thread AgeUpdate1 = new Thread(thread1);
+            Thread PrintDisplay1 = new Thread(thread2);
+
+            AgeUpdate1.Start();
+            //PrintDisplay1.Start();
+
+            AgeUpdate1.Join();
+            //PrintDisplay1.Join();
+
+            void thread1()
+            {
+                for (int i = 1; i <= 5; i++)
+                {
+                    Dog.AgeUpdater();
+                    Cat.AgeUpdater();
+                    Thread.Sleep(1000);
+                    thread2();
+
+                }
+
+                //thread2();
+            }
+
+            void thread2()
+            {
+                Dog.DisplayNameAge();
+                Cat.DisplayNameAge();
+            }
+        }
+    }
+}
+
+    
